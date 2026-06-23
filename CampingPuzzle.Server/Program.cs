@@ -1,4 +1,3 @@
-
 namespace CampingPuzzle.Server
 {
     public class Program
@@ -27,7 +26,6 @@ namespace CampingPuzzle.Server
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
