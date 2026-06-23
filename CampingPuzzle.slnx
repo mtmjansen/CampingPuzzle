@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="campingpuzzle.client/campingpuzzle.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="CampingPuzzle.Server/CampingPuzzle.Server.csproj" />
+</Solution>
