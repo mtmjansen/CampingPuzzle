@@ -51,6 +51,17 @@ export default defineConfig({
                 target,
                 secure: false
             }
+            ,
+            '^/Puzzle': {
+                target,
+                secure: false
+            }
+            ,
+            '^/campingHub': {
+                target,
+                secure: false,
+                ws: true
+            }
         },
         port: parseInt(env.DEV_SERVER_PORT || '49443'),
         https: {

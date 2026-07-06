@@ -1,9 +1,8 @@
 <template>
   <button class="tile" :class="{ 'tile--active': active }" @click="$emit('click')" type="button">
     <span class="tile__content">
-      <!-- <span v-if="value !== undefined">{{ value }}</span>
-      <span v-else>{{ row }},{{ col }}</span> -->
-        <img alt="tree" class="icon" src="../assets/tree.svg" width="100%" height="100%" />
+      <span v-if="value !== undefined">{{ value }}</span>
+      <span v-else>{{ row }},{{ col }}</span>
     </span>
   </button>
 </template>
@@ -23,19 +22,17 @@ const emit = defineEmits<{
 
 <style scoped>
 .tile {
-  /* width: 10%;
-  height: 40%; */
+  width: 100%;
   aspect-ratio: 1;
-  border: 0.2rem solid var(--tile-border, #d1d5db);
-  /* border: 1px solid var(--tile-border, #d1d5db); */
-  border-radius: 0.25rem;
+  border: 1px solid var(--tile-border, #d1d5db);
+  border-radius: 0.5rem;
   background: var(--tile-background, #f8fafc);
-  color: var(--tile-foreground, #5d77af);
+  color: var(--tile-foreground, #111827);
   display: grid;
-  place-items: left;
+  place-items: center;
   cursor: pointer;
   transition: background-color .2s ease, transform .2s ease, border-color .2s ease;
-  /* padding: 1rem; */
+  padding: 0;
 }
 
 .tile:hover {

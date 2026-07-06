@@ -4,7 +4,7 @@ public class Camping
 {
     public int Rows { get; set; }
     public int Columns { get; set; }
-    public Tile[] Tiles { get; set; }
+    public Tile[] Tiles { get; init; }
 
     private IEnumerable<Tile> Init()
     {

@@ -3,4 +3,7 @@
 GET {{CampingPuzzle.Server_HostAddress}}/weatherforecast/
 Accept: application/json
 
+GET {{CampingPuzzle.Server_HostAddress}}/puzzle/
+Accept: application/json
+
 ###
