@@ -1,13 +1,6 @@
-<template>
-  <button class="tile" :class="{ 'tile--active': active }" @click="$emit('click')" type="button">
-    <span class="tile__content">
-      <span v-if="value !== undefined">{{ value }}</span>
-      <span v-else>{{ row }},{{ col }}</span>
-    </span>
-  </button>
-</template>
-
 <script setup lang="ts">
+import { onUnmounted, ref } from 'vue';
+
 const props = defineProps({
   row: { type: Number, required: true },
   col: { type: Number, required: true },
@@ -15,13 +8,53 @@ const props = defineProps({
   active: { type: Boolean, default: false }
 })
 
+const b = ref(0)
+let flashTimeout: ReturnType<typeof setTimeout> | undefined
+
+function flash() {
+  if (flashTimeout !== undefined) {
+    clearTimeout(flashTimeout)
+  }
+
+  b.value = 2.5
+  flashTimeout = setTimeout(() => {
+    b.value = 0
+    flashTimeout = undefined
+  }, 300)
+}
+
+onUnmounted(() => {
+  if (flashTimeout !== undefined) {
+    clearTimeout(flashTimeout)
+  }
+})
+
+defineExpose({ flash })
+
 const emit = defineEmits<{
   (event: 'click'): void
 }>()
 </script>
 
+<template>
+  <button
+    class="tile"
+    :class="{ 'tile--active': active }"
+    :style="{ '--flash-border-width': `${b}px` }"
+    @click="$emit('click')"
+    type="button"
+  >
+    <span class="tile__content">
+      <span v-if="value !== undefined">{{ value }}</span>
+      <span v-else>{{ row }},{{ col }}</span>
+    </span>
+  </button>
+</template>
+
 <style scoped>
+
 .tile {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
   border: 1px solid var(--tile-border, #d1d5db);
@@ -44,6 +77,16 @@ const emit = defineEmits<{
   color: white;
   border-color: rgba(96, 165, 250, .75);
   transform: translateY(-1px);
+}
+
+.tile::after {
+  position: absolute;
+  inset: 0;
+  border: var(--flash-border-width) solid red;
+  border-radius: inherit;
+  content: '';
+  pointer-events: none;
+  transition: border-width 0.3s ease;
 }
 
 .tile__content {
